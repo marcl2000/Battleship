@@ -31,7 +31,7 @@ public class BoardActivity extends AppCompatActivity {
                 //mStartButton.setText("Clicked");
                 Intent i = new Intent(BoardActivity.this, ScreenActivity.class);
                 startActivity(i);
-                ////CODE FOR SWTITCHING TO ANOTHER CLASS/SCREEN
+
             }
         });
 
