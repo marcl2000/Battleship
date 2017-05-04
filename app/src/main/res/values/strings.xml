@@ -1,0 +1,19 @@
+<resources>
+    //Home page//
+    <string name="app_name">Battleship</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_quiz">Welcome to BATTLESHIP!</string>
+    <string name="btnStart">Start Game</string>
+    <string name="text_view">By: Coco and Claudia</string>
+
+    //Instruction page//
+    <string name="instruction_title">Instructions:</string>
+    <string name="instruction_body1">Welcome to Battleship! Press the Start Game button on the menu page to begin a game.</string>
+    <string name="instruction_body2">Follow the prompts to place your ship and attack the opponent.
+         There is a two length Destroyer, a three length Submarine, a three length Cruiser, and a four length Battleship. Make
+         sure not to overlap your ships!</string>
+    <string name="instruction_body3">Upon attack, the square chosen will turn black if the attack was unsuccessful, and red if
+         an enemy ship has been hit. Sink all the enemy ships before they sink yours to win! </string>
+    <string name="instruction_body4">Press the back button to go back to the menu and start a game.</string>
+    <string name="btnBack">Back to Menu</string>
+</resources>
