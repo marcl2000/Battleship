@@ -68,7 +68,7 @@ public class ScreenActivity extends AppCompatActivity {
             mContext = c;
         }
 
-        // The total number of things contained within the adapter
+        // Total number of things contained within the adapter
         public int getCount() {
             return buttons.length;
         }
