@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.61"
+        android:text="@string/board_label_1"
+        />
+
+    <GridView
+        android:id="@+id/aiBoard"
+        android:layout_width="320dp"
+        android:layout_height="220dp"
+        android:layout_margin="4dp"
+        android:columnWidth="80dp"
+        android:gravity="center"
+        android:numColumns="10"
+        android:stretchMode="columnWidth" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.61" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/board_label_2"/>
+
+    <GridView
+        android:id="@+id/userBoard"
+        android:layout_width="320dp"
+        android:layout_height="220dp"
+        android:layout_margin="4dp"
+        android:columnWidth="80dp"
+        android:gravity="center"
+        android:numColumns="10"
+        android:stretchMode="columnWidth" />
 
 </LinearLayout>

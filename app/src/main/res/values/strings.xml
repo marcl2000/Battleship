@@ -16,4 +16,8 @@
          an enemy ship has been hit. Sink all the enemy ships before they sink yours to win! </string>
     <string name="instruction_body4">Press the back button to go back to the menu and start a game.</string>
     <string name="btnBack">Back to Menu</string>
+
+    //Board page//
+    <string name="board_label_1">Opponent Board Below:</string>
+    <string name="board_label_2">Your Board Below:</string>
 </resources>
