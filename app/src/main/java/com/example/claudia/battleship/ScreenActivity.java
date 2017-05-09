@@ -85,8 +85,10 @@ public class ScreenActivity extends AppCompatActivity {
             return position;
         }
 
+
         public View getView(int position,
                             View convertView, ViewGroup parent) {
+
             Button btn;
             if (convertView == null) {
                 // if it's not recycled, initialize some attributes
@@ -97,6 +99,7 @@ public class ScreenActivity extends AppCompatActivity {
             else {
                 btn = (Button) convertView;
             }
+            btn.setOnClickListener(new MyOnClickListener(position));
             //exus
             //btn.setText(buttons[position]);
 
@@ -104,7 +107,17 @@ public class ScreenActivity extends AppCompatActivity {
             //btn.setBackgroundResource(R.drawable.button);
             btn.setId(position);
 
-            return btn;
+            return btn; //hi
+        }
+    }
+
+    class MyOnClickListener implements View.OnClickListener {
+        private final int position;
+        public MyOnClickListener(int position){
+            this.position = position;
+        }
+        public void onClick(View v){
+            //functttitontontoantaon(this.position);
         }
     }
 }
