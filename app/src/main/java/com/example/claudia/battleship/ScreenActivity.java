@@ -1,22 +1,15 @@
 package com.example.claudia.battleship;
 
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.GridView;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.GridView;
-import android.widget.TableLayout;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 
 import static com.example.claudia.battleship.R.id.aiBoard;
 import static com.example.claudia.battleship.R.id.userBoard;
@@ -40,8 +33,7 @@ public class ScreenActivity extends AppCompatActivity {
         userGridView.setAdapter(new ButtonAdapter(this));
 
 
-        //GridView gridview = (GridView) findViewById(R.id.gridview);
-        //gridview.setAdapter(new ImageAdapter(this));
+
 
 
         }
@@ -99,15 +91,15 @@ public class ScreenActivity extends AppCompatActivity {
             else {
                 btn = (Button) convertView;
             }
-            btn.setOnClickListener(new MyOnClickListener(position));
+            btn.setOnClickListener(new MyOnClickListener(position)); //why is this here and why is it not an ID given
             //exus
             //btn.setText(buttons[position]);
 
             btn.setTextColor(Color.WHITE);
-            //btn.setBackgroundResource(R.drawable.button);
-            btn.setId(position);
 
-            return btn; //hi
+            btn.setId(position); //***********Does this change the id of the button? What happened to the string of IDs?
+
+            return btn;
         }
     }
 

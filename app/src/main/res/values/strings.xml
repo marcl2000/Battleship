@@ -20,4 +20,5 @@
     //Board page//
     <string name="board_label_1">Opponent Board Below:</string>
     <string name="board_label_2">Your Board Below:</string>
+    <string name="title_activity_instruction">InstructionActivity</string>
 </resources>
