@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class BoardActivity extends AppCompatActivity {
 //title page
@@ -38,7 +39,7 @@ public class BoardActivity extends AppCompatActivity {
         mInfoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(BoardActivity.this, Instructions.class);
+                Intent i = new Intent(BoardActivity.this, InstructionActivity.class);
                 startActivity(i);
                 }
         });

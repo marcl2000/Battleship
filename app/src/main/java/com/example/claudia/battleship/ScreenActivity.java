@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import static com.example.claudia.battleship.R.id.aiBoard;
@@ -31,7 +32,7 @@ public class ScreenActivity extends AppCompatActivity {
         GridView userGridView = (GridView) findViewById(userBoard);
         aiGridView.setAdapter(new ButtonAdapter(this));
         userGridView.setAdapter(new ButtonAdapter(this));
-
+        Toast.makeText(this, "Tap the location you wish to strike.", Toast.LENGTH_SHORT);
 
 
 
