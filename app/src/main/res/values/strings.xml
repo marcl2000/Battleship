@@ -21,4 +21,7 @@
     <string name="board_label_1">Opponent Board Below:</string>
     <string name="board_label_2">Your Board Below:</string>
     <string name="title_activity_instruction">InstructionActivity</string>
+    <string name="title_activity_user_screen">UserScreenActivity</string>
+    <string name="title_activity_battleship_player">BattleshipPlayerActivity</string>
+    <string name="title_activity_battleship_user">BattleshipUserActivity</string>
 </resources>

@@ -30,7 +30,7 @@ public class BoardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //mStartButton.setText("Clicked");
-                Intent i = new Intent(BoardActivity.this, ScreenActivity.class);
+                Intent i = new Intent(BoardActivity.this, BattleshipUserActivity.class);
                 startActivity(i);
 
             }

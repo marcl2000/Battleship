@@ -22,6 +22,10 @@
         <activity
             android:name=".InstructionActivity"
             android:label="@string/title_activity_instruction"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BattleshipUserActivity"
+            android:label="@string/title_activity_battleship_user"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
