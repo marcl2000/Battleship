@@ -14,7 +14,7 @@ package com.example.claudia.battleship;
 public class Board {
     static Scanner sc = new Scanner(System.in);
 
-    private static void main(String[] args) {
+    /*private static void main(String[] args) {
         System.out.println("**********************************");
         System.out.println("");
         System.out.println("Welcome to [BATTLESHIP]");
@@ -35,6 +35,7 @@ public class Board {
 
         runGame(board, AIboard);
     }
+    */
 
     private static int getNum(int min, int max) {
         min = (int) Math.ceil(min);

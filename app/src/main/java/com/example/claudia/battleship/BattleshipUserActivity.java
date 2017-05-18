@@ -9,10 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.example.claudia.battleship.R.id.aiBoard;
 import static com.example.claudia.battleship.R.id.userBoard;
@@ -26,90 +33,65 @@ public class BattleshipUserActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        GridView aiGridView = (GridView) findViewById(aiBoard);
-        GridView userGridView = (GridView) findViewById(userBoard);
-        aiGridView.setAdapter(new BattleshipUserActivity.ButtonAdapter(this));
-        userGridView.setAdapter(new BattleshipUserActivity.ButtonAdapter(this));
-        Toast.makeText(this, "Tap the location you wish to strike.", Toast.LENGTH_SHORT);
+        GridView aiGridView = (GridView) findViewById(R.id.aiBoard);
+        GridView userGridView = (GridView) findViewById(R.id.userBoard);
+        String[] tempAIArray = new String[100];
+        for(int i =0;i<100;i++){
+            tempAIArray[i]="~";
+        }
+        List<String> AIArray = new ArrayList<String>(Arrays.asList(tempAIArray));
 
-
-
-
-    }
-
-
-
-
-    public class ButtonAdapter extends BaseAdapter {
-        private Context mContext;
-        private String[][] buttons = { {"b00", "b01", "b02", "b03", "b04", "b05", "b06", "b07", "b08", "b09"},
-                {"b10", "b11", "b12", "b13", "b14", "b15", "b16", "b17", "b18", "b19"},
-                {"b20", "b21", "b22", "b23", "b24", "b25", "b26", "b27", "b28", "b29"},
-                {"b30", "b31", "b32", "b33", "b34", "b35", "b36", "b37", "b38", "b39"},
-                {"b40", "b41", "b42", "b43", "b44", "b45", "b46", "b47", "b48", "b49"},
-                {"b50", "b51", "b52", "b53", "b54", "b55", "b56", "b57", "b58", "b59"},
-                {"b60", "b61", "b62", "b63", "b64", "b65", "b66", "b67", "b68", "b69"},
-                {"b70", "b71", "b72", "b73", "b74", "b75", "b76", "b77", "b78", "b79"},
-                {"b80", "b81", "b82", "b83", "b84", "b85", "b86", "b87", "b88", "b89"},
-                {"b90", "b91", "b92", "b93", "b94", "b95", "b96", "b97", "b98", "b99"} };
-
-
-        // Gets the context so it can be used later
-        public ButtonAdapter(Context c) {
-            mContext = c;
+        String[] tempUserArray = new String[100];
+        for(int i =0;i<100;i++){
+            tempUserArray[i]="~";
         }
 
-        // Total number of things contained within the adapter
-        public int getCount() {
-            return buttons.length;
-        }
+        List<String> UserArray = new ArrayList<String>(Arrays.asList(tempUserArray));
 
-        // Require for structure, not really used in my code.
-        public Object getItem(int position) {
-            return null;
-        }
+        ArrayAdapter<String> AIAdapter =new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, AIArray);
+        aiGridView.setAdapter(AIAdapter);
+        ArrayAdapter<String> UserAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, UserArray);
+        userGridView.setAdapter(UserAdapter);
 
-        // Require for structure, not really used in my code. Can
-        // be used to get the id of an item in the adapter for
-        // manual control.
-        public long getItemId(int position) {
-            return position;
-        }
+        aiGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = parent.getItemAtPosition(position).toString();
 
 
-        public View getView(int position,
-                            View convertView, ViewGroup parent) {
-
-            Button btn;
-            if (convertView == null) {
-                // if it's not recycled, initialize some attributes
-                btn = new Button(mContext);
-                btn.setLayoutParams(new GridView.LayoutParams(100, 55));
-                btn.setPadding(8, 8, 8, 8);
             }
-            else {
-                btn = (Button) convertView;
-            }
-            btn.setOnClickListener(new BattleshipUserActivity.MyOnClickListener(position)); //why is this here and why is it not an ID given
-            //exus
-            //btn.setText(buttons[position]);
+        });
 
-            btn.setTextColor(Color.WHITE);
 
-            btn.setId(position); //***********Does this change the id of the button? What happened to the string of IDs?
 
-            return btn;
-        }
+
+
+
+
+
+
+
+        //Toast.makeText(this, "Tap the location you wish to strike.", Toast.LENGTH_SHORT);
+
+
+        /*int board[][] = new int[10][10];
+        initBoard(board, false);
+        int AIboard[][] = new int[10][10];
+        initBoard(AIboard, true);
+
+        System.out.println("You will now place your ships.");
+        generateShip(board);
+        System.out.println("");
+        System.out.println("**********************************");
+        displayBoard(board, false);
+
+        runGame(board, AIboard);
+    }
+    */
+
+
+
     }
 
-    class MyOnClickListener implements View.OnClickListener {
-        private final int position;
-        public MyOnClickListener(int position){
-            this.position = position;
-        }
-        public void onClick(View v){
-            //functttitontontoantaon(this.position);
-        }
     }
 
-}
