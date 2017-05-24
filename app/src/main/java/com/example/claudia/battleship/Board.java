@@ -9,43 +9,30 @@ package com.example.claudia.battleship;
 
  */
 
+        import android.content.Context;
+        import android.widget.GridView;
+        import android.widget.Toast;
+
         import java.util.Scanner;
 
 public class Board {
-    static Scanner sc = new Scanner(System.in);
+    private static Context context;
 
-    /*private static void main(String[] args) {
-        System.out.println("**********************************");
-        System.out.println("");
-        System.out.println("Welcome to [BATTLESHIP]");
-        System.out.println("By Coco and Claudia");
-        System.out.println("");
-        System.out.println("**********************************");
 
-        int board[][] = new int[10][10];
-        initBoard(board, false);
-        int AIboard[][] = new int[10][10];
-        initBoard(AIboard, true);
-
-        System.out.println("You will now place your ships.");
-        generateShip(board);
-        System.out.println("");
-        System.out.println("**********************************");
-        displayBoard(board, false);
-
-        runGame(board, AIboard);
+    public Board(Context context){
+        this.context = context.getApplicationContext();
     }
-    */
 
     private static int getNum(int min, int max) {
         min = (int) Math.ceil(min);
         max = (int) Math.floor(max);
         return (int) (Math.floor(Math.random() * (max - min + 1)) + min);
     }
-    private static void generateShip(int[][] board) {
-        System.out.println("");
-        destroyer(board);
-        System.out.println("**********************************");
+
+
+    public static void generateShip(GridView userGridView) {
+        destroyer(userGridView);
+
         displayBoard(board, false);
         System.out.println("");
         System.out.println("**********************************");
@@ -89,20 +76,13 @@ public class Board {
 
     }
 
-    private static void destroyer(int[][] board){
-        System.out.println("Place your Destroyer (size 2):");
-        System.out.println("Enter a valid x coordinate.");
-        int x = sc.nextInt();
-        while(x<0||x>10){
-            System.out.println("Enter a valid x coordinate.");
-            x = sc.nextInt();
-        }
-        System.out.println("Enter a valid y coordinate.");
-        int y = sc.nextInt();
-        while(y<0||y>10){
-            System.out.println("Enter a valid y coordinate.");
-            y = sc.nextInt();
-        }
+    private static void destroyer(GridView userGridView){
+        BattleshipUserActivity.setReasonWhy(1);
+
+        Toast.makeText(context,"Pick a point for your Destroyer (size 2):" , Toast.LENGTH_SHORT).show();
+        //does it wait for the user to pick a point?
+
+
         int direction;
         System.out.println("In which direction?");
         printDirection();
@@ -117,7 +97,7 @@ public class Board {
         //}
     }
 
-    private static void submarine(int[][] board){
+    private static void submarine(GridView userGridView){
         System.out.println("Place your Submarine (size 3):");
         System.out.println("Enter a valid x coordinate.");
         int x = sc.nextInt();
@@ -144,7 +124,7 @@ public class Board {
         //}
     }
 
-    private static void cruiser(int[][] board){
+    private static void cruiser(GridView userGridView){
         System.out.println("Place your Cruiser (size 3):");
         System.out.println("Enter a valid x coordinate.");
         int x = sc.nextInt();
@@ -171,7 +151,7 @@ public class Board {
         //}
     }
 
-    private static void battleship(int[][] board){
+    private static void battleship(GridView userGridView){
         System.out.println("Place your Battleship (size 4):");
         System.out.println("Enter a valid x coordinate.");
         int x = sc.nextInt();

@@ -24,7 +24,24 @@ import java.util.List;
 import static com.example.claudia.battleship.R.id.aiBoard;
 import static com.example.claudia.battleship.R.id.userBoard;
 
+/*REASON WHY: why the text was clicked
+         1: Placing a ship
+         2: Attacking a ship
+*/
+
+
+
 public class BattleshipUserActivity extends AppCompatActivity {
+    private static int reasonWhy;
+
+    public static int getReasonWhy() {
+        return reasonWhy;
+    }
+
+    public static void setReasonWhy(int newReason) {
+        reasonWhy = newReason;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +53,19 @@ public class BattleshipUserActivity extends AppCompatActivity {
         GridView aiGridView = (GridView) findViewById(R.id.aiBoard);
         GridView userGridView = (GridView) findViewById(R.id.userBoard);
         String[] tempAIArray = new String[100];
-        for(int i =0;i<100;i++){
-            tempAIArray[i]="~";
+        for (int i = 0; i < 100; i++) {
+            tempAIArray[i] = "~";
         }
         List<String> AIArray = new ArrayList<String>(Arrays.asList(tempAIArray));
 
         String[] tempUserArray = new String[100];
-        for(int i =0;i<100;i++){
-            tempUserArray[i]="~";
+        for (int i = 0; i < 100; i++) {
+            tempUserArray[i] = "~";
         }
 
         List<String> UserArray = new ArrayList<String>(Arrays.asList(tempUserArray));
 
-        ArrayAdapter<String> AIAdapter =new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, AIArray);
+        ArrayAdapter<String> AIAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, AIArray);
         aiGridView.setAdapter(AIAdapter);
         ArrayAdapter<String> UserAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, UserArray);
         userGridView.setAdapter(UserAdapter);
@@ -62,6 +79,20 @@ public class BattleshipUserActivity extends AppCompatActivity {
             }
         });
 
+        userGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = parent.getItemAtPosition(position).toString();
+
+
+            }
+        });
+
+
+        Toast.makeText(getApplication().getBaseContext(), "Welcome to Battleship!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplication().getBaseContext(), "You will now choose your ships", Toast.LENGTH_LONG).show();
+
+        Board.generateShip(userGridView);
 
 
 
@@ -71,7 +102,6 @@ public class BattleshipUserActivity extends AppCompatActivity {
 
 
 
-        //Toast.makeText(this, "Tap the location you wish to strike.", Toast.LENGTH_SHORT);
 
 
         /*int board[][] = new int[10][10];
@@ -90,8 +120,29 @@ public class BattleshipUserActivity extends AppCompatActivity {
     */
 
 
-
     }
 
+    public void onClick(View v) {
+
+        final int reasonWhy = BattleshipUserActivity.getReasonWhy();
+
+        switch (reasonWhy) {
+
+            case 1:
+                //change that point to a different symbol
+
+
+                break;
+
+            case 2:
+
+
+                break;
+
+
+        }
+
+
     }
+}
 
