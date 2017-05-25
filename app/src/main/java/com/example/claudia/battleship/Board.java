@@ -1,6 +1,6 @@
 package com.example.claudia.battleship;
 
-/**
+/*
 
  -1 = empty
  0 = hit
@@ -13,6 +13,8 @@ package com.example.claudia.battleship;
         import android.widget.GridView;
         import android.widget.Toast;
 
+        import java.util.ArrayList;
+        import java.util.List;
         import java.util.Scanner;
 
 public class Board {
@@ -29,10 +31,9 @@ public class Board {
         return (int) (Math.floor(Math.random() * (max - min + 1)) + min);
     }
 
-
+    /**
     public static void generateShip(GridView userGridView) {
         destroyer(userGridView);
-
         displayBoard(board, false);
         System.out.println("");
         System.out.println("**********************************");
@@ -51,194 +52,69 @@ public class Board {
         displayBoard(board, false);
         System.out.println("");
         System.out.println("**********************************");
+    }**/
+
+    public static void placeStart(List board){
+
     }
-
-    private static void generateAIShip(int[][] AIboard){
-        int x = getNum(0, 9);
-        int y = getNum(0, 9);
-        int direction = getNum(1, 4);
-        placeAIShip(AIboard, direction, x, y, 2);
-
-        x = getNum(0, 9);
-        y = getNum(0, 9);
-        direction = getNum(1, 4);
-        placeAIShip(AIboard, direction, x, y, 3);
-
-        x = getNum(0, 9);
-        y = getNum(0, 9);
-        direction = getNum(1, 4);
-        placeAIShip(AIboard, direction, x, y, 3);
-
-        x = getNum(0, 9);
-        y = getNum(0, 9);
-        direction = getNum(1, 4);
-        placeAIShip(AIboard, direction, x, y, 4);
+    public static void placeFinish(List board){
 
     }
 
-    private static void destroyer(GridView userGridView){
-        BattleshipUserActivity.setReasonWhy(1);
-
-        Toast.makeText(context,"Pick a point for your Destroyer (size 2):" , Toast.LENGTH_SHORT).show();
-        //does it wait for the user to pick a point?
-
-
-        int direction;
-        System.out.println("In which direction?");
-        printDirection();
-        direction = sc.nextInt();
-        while(direction>4||direction<1){
-            System.out.println("Enter a valid direction.");
-            printDirection();
-            direction = sc.nextInt();
-        }
-        //if(placementCheck(board, direction, x, y, 2)==true){
-        placeShip(board, direction, x, y, 2);
-        //}
-    }
-
-    private static void submarine(GridView userGridView){
-        System.out.println("Place your Submarine (size 3):");
-        System.out.println("Enter a valid x coordinate.");
-        int x = sc.nextInt();
-        while(x<0||x>10){
-            System.out.println("Enter a valid x coordinate.");
-            x = sc.nextInt();
-        }
-        System.out.println("Enter a valid y coordinate.");
-        int y = sc.nextInt();
-        while(y<0||y>10){
-            System.out.println("Enter a valid y coordinate.");
-            y = sc.nextInt();
-        }
-        System.out.println("In which direction?");
-        printDirection();
-        int direction = sc.nextInt();
-        while(direction>4||direction<1){
-            System.out.println("Enter a valid direction.");
-            printDirection();
-            direction = sc.nextInt();
-        }
-        //if(placementCheck(board, direction, x, y, 3)==true){
-        placeShip(board, direction, x, y, 3);
-        //}
-    }
-
-    private static void cruiser(GridView userGridView){
-        System.out.println("Place your Cruiser (size 3):");
-        System.out.println("Enter a valid x coordinate.");
-        int x = sc.nextInt();
-        while(x<0||x>10){
-            System.out.println("Enter a valid x coordinate.");
-            x = sc.nextInt();
-        }
-        System.out.println("Enter a valid y coordinate.");
-        int y = sc.nextInt();
-        while(y<0||y>10){
-            System.out.println("Enter a valid y coordinate.");
-            y = sc.nextInt();
-        }
-        System.out.println("In which direction?");
-        printDirection();
-        int direction = sc.nextInt();
-        while(direction>4||direction<1){
-            System.out.println("Enter a valid direction.");
-            printDirection();
-            direction = sc.nextInt();
-        }
-        //if(placementCheck(board, direction, x, y, 3)==true){
-        placeShip(board, direction, x, y, 3);
-        //}
-    }
-
-    private static void battleship(GridView userGridView){
-        System.out.println("Place your Battleship (size 4):");
-        System.out.println("Enter a valid x coordinate.");
-        int x = sc.nextInt();
-        while(x<0||x>10){
-            System.out.println("Enter a valid x coordinate.");
-            x = sc.nextInt();
-        }
-        System.out.println("Enter a valid y coordinate.");
-        int y = sc.nextInt();
-        while(y<0||y>10){
-            System.out.println("Enter a valid y coordinate.");
-            y = sc.nextInt();
-        }
-        System.out.println("In which direction?");
-        printDirection();
-        int direction = sc.nextInt();
-        while(direction>4||direction<1){
-            System.out.println("Enter a valid direction:");
-            printDirection();
-            direction = sc.nextInt();
-        }
-        //if(placementCheck(board, direction, x, y, 4)==true){
-        placeShip(board, direction, x, y, 4);
-        //}
-    }
-
-    private static void printDirection(){
-        System.out.println("Enter 1 for RIGHT.");
-        System.out.println("Enter 2 for LEFT.");
-        System.out.println("Enter 3 for UP.");
-        System.out.println("Enter 4 for DOWN.");
-    }
-
-    private static void placeAIShip(int[][] board, int direction, int x, int y,  int size){
+    private static void placeAIShip(List board, int direction, int x, int y,  int size){
         if(direction==3){
             for(int i=0; i<size; i++){
                 if(y-i>=0){
-                    board[x][y-i] = 1;
+                    board[x][y-i] = "o";
                 }
             }
         }
         if(direction==4){
             for(int i=0; i<size; i++){
                 if(y+i<=9){
-                    board[x][y+i] = 1;
+                    board[x][y+i] = "o";
                 }
             }
         }
         if(direction==1){
             for(int i=0; i<size; i++){
                 if(x-i>=0){
-                    board[x-i][y] = 1;
+                    board[x-i][y] = "o";
                 }
             }
         }
         if(direction==2){
             for(int i=0; i<size; i++){
                 if(x+i<=9){
-                    board[x+i][y] = 1;
+                    board[x+i][y] = "o";
                 }
             }
         }
     }
 
-    private static void placeShip(int[][] board, int direction, int x, int y,  int size){
+    private static void placeShip(List board, int direction, int x, int y,  int size){
         if(direction==1){
             for(int i=0; i<size; i++){
                 if(x>0&&x<10&&y-i>0&&y-i<10){
-                    board[x][y-i] = 1;
+                    board[x][y-i] = "o";
                 }}
         }
         if(direction==2){
             for(int i=0; i<size; i++){
                 if(x>0&&x<10&&y+i>0&&y+i<10){
-                    board[x][y+i] = 1;
+                    board[x][y+i] = "o";
                 }}
         }
         if(direction==3){
             for(int i=0; i<size; i++){
                 if(x-i>0&&x-i<10&&y>0&&y<10){
-                    board[x-i][y] = 1;
+                    board[x-i][y] = "o";
                 }}
         }
         if(direction==4){
             for(int i=0; i<size; i++){
                 if(x+i>0&&x+i<10&&y>0&&y<10){
-                    board[x+i][y] = 1;
+                    board[x+i][y] = "o";
                 }}
         }
     }
@@ -272,7 +148,7 @@ public class Board {
      return true;
      }**/
 
-    private static void runGame(int[][] board, int[][] AIboard) {
+    private static void runGame(List board, int[][] AIboard) {
         AIturn(board);
         turn(AIboard);
         if (scan(AIboard) == false) {
@@ -284,16 +160,14 @@ public class Board {
             System.out.println("All your ships were destroyed. YOU LOSE!");
             return;
         }
-        runGame(board, AIboard);
+        //runGame(board, AIboard);
     }
 
-    private static boolean scan(int[][] board) {
+    private static boolean scan(List board) {
         int x = 0;
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if (board[i][j] == 1) {
-                    x = 1;
-                }
+        if(int i=0; i<100; i++){
+            if(board.get(i)=="-1"){
+                x == -1;
             }
         }
         if (x == 1) {
@@ -302,7 +176,7 @@ public class Board {
         return false;
     }
 
-    public static void AIturn(int[][] board) {
+    public static void AIturn(List board) {
         // boolean path = false;
         // int xprev = 0;
         // int yprev = 0;
@@ -340,7 +214,7 @@ public class Board {
         // }
     }
 
-    private static void turn(int[][] AIboard) {
+    private static void turn(List AIboard) {
         System.out.println("");
         System.out.println("**********************************");
         System.out.println("YOUR TURN.");
@@ -374,7 +248,7 @@ public class Board {
         displayBoard(AIboard, true);
     }
 
-    public static boolean hitCheck(int[][] board, int x, int y) {
+    public static boolean hitCheck(List board, int x, int y) {
         if (board[x][y] == -1) {
             return false; // empty square
         }
@@ -384,10 +258,10 @@ public class Board {
         return true;
     }
 
-    private static void initBoard(int[][] board, boolean AI) {
+    private static void initBoard(List board, boolean AI) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                board[i][j] = -1;
+                board[i][j] = "~";
             }
         }
         if (AI == true) {
@@ -395,7 +269,7 @@ public class Board {
         }
     }
 
-    private static void displayBoard(int[][] board, boolean AI) {
+    private static void displayBoard(List board, boolean AI) {
         System.out.println("");
         if (AI == true) {
             System.out.println("    [ENEMY BOARD]");
@@ -437,7 +311,7 @@ public class Board {
         System.out.println("");
     }
 
-    private static boolean overlapCheck(int x, int y, int[][] board) {
+    private static boolean overlapCheck(int x, int y, List board) {
         if (board[x][y] == -1) {
             return true;
         }

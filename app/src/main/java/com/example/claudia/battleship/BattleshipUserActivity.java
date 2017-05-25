@@ -56,26 +56,43 @@ public class BattleshipUserActivity extends AppCompatActivity {
         for (int i = 0; i < 100; i++) {
             tempAIArray[i] = "~";
         }
-        List<String> AIArray = new ArrayList<String>(Arrays.asList(tempAIArray));
+        final List<String> AIArray = new ArrayList<String>(Arrays.asList(tempAIArray));
 
         String[] tempUserArray = new String[100];
         for (int i = 0; i < 100; i++) {
             tempUserArray[i] = "~";
         }
 
-        List<String> UserArray = new ArrayList<String>(Arrays.asList(tempUserArray));
+        final List<String> UserArray = new ArrayList<String>(Arrays.asList(tempUserArray));
 
-        ArrayAdapter<String> AIAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, AIArray);
+        final ArrayAdapter<String> AIAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, AIArray);
         aiGridView.setAdapter(AIAdapter);
-        ArrayAdapter<String> UserAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, UserArray);
+        final ArrayAdapter<String> UserAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, UserArray);
         userGridView.setAdapter(UserAdapter);
 
         aiGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
-
-
+                String gameStatus = "placingDestroyer";
+                if(gameStatus=="placingDestroyer"){
+                    //place destroyer
+                    gameStatus="placingSubmarine";
+                    }
+                else if(gameStatus=="placingSubmarine"){
+                    //place submarine
+                    gameStatus="placingCruiser";
+                }
+                else if(gameStatus=="placingCruiser"){
+                    //place cruiser
+                    gameStatus="placingBattleship"
+                }
+                else if(gameStatus=="placingBattleship"){
+                    //place battleship
+                    gameStatus="ongoing";
+                }else{
+                    //PLAY THE GAMEEE1!!!
+                }
             }
         });
 
@@ -84,17 +101,14 @@ public class BattleshipUserActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
 
-
             }
         });
 
-
         Toast.makeText(getApplication().getBaseContext(), "Welcome to Battleship!", Toast.LENGTH_SHORT).show();
         Toast.makeText(getApplication().getBaseContext(), "You will now choose your ships", Toast.LENGTH_LONG).show();
-
-        Board.generateShip(userGridView);
-
-
+        Toast.makeText(getApplication().getBaseContext(), "Choose the initial position of your Destroyer (size 2)", Toast.LENGTH_LONG).show();
+        Board.placeStart(UserArray);
+        //
 
 
 
@@ -118,29 +132,6 @@ public class BattleshipUserActivity extends AppCompatActivity {
         runGame(board, AIboard);
     }
     */
-
-
-    }
-
-    public void onClick(View v) {
-
-        final int reasonWhy = BattleshipUserActivity.getReasonWhy();
-
-        switch (reasonWhy) {
-
-            case 1:
-                //change that point to a different symbol
-
-
-                break;
-
-            case 2:
-
-
-                break;
-
-
-        }
 
 
     }
