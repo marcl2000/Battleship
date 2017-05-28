@@ -9,16 +9,18 @@ package com.example.claudia.battleship;
 
  */
 
-        import android.content.Context;
-        import android.widget.GridView;
-        import android.widget.Toast;
+import android.content.Context;
+import android.widget.GridView;
+import android.widget.Toast;
 
-        import java.util.ArrayList;
-        import java.util.List;
-        import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 public class Board {
     private static Context context;
+    private static int posit;
 
 
     public Board(Context context){
@@ -31,123 +33,207 @@ public class Board {
         return (int) (Math.floor(Math.random() * (max - min + 1)) + min);
     }
 
-    /**
-    public static void generateShip(GridView userGridView) {
-        destroyer(userGridView);
-        displayBoard(board, false);
-        System.out.println("");
-        System.out.println("**********************************");
-        submarine(board);
-        System.out.println("**********************************");
-        displayBoard(board, false);
-        System.out.println("");
-        System.out.println("**********************************");
-        cruiser(board);
-        System.out.println("**********************************");
-        displayBoard(board, false);
-        System.out.println("");
-        System.out.println("**********************************");
-        battleship(board);
-        System.out.println("**********************************");
-        displayBoard(board, false);
-        System.out.println("");
-        System.out.println("**********************************");
-    }**/
 
-    public static void placeStart(List board){
+    public static void placeStart(List<String> UserArray){
+        posit = BattleshipUserActivity.getPosition();
+        UserArray.set(posit, "o");
+
 
     }
-    public static void placeFinish(List board){
+    public static void placeFinish(List<String> UserArray){
+        String gameStatus = BattleshipUserActivity.getGameStatus();
+
+        if((posit - BattleshipUserActivity.getPosition()) == 1){
+            //the boat is going left
+            gameStatus = BattleshipUserActivity.getGameStatus();
+            if (gameStatus == "placingDestroyerFinish"){
+                //length 2
+                UserArray.set(posit-1, "o");
+            }
+            else if ((gameStatus == "placingSubmarineFinish")||(gameStatus == "placingCruiserFinish")){
+                //length 3
+                UserArray.set(posit-1, "o");
+                UserArray.set(posit-2, "o");
+            }
+            else if (gameStatus == "placingBattleshipFinish"){
+                //length 4
+                UserArray.set(posit-1, "o");
+                UserArray.set(posit-2, "o");
+                UserArray.set(posit-3, "o");
+            }
+
+        }
+        if((posit - BattleshipUserActivity.getPosition()) == -1){
+            //the ship is going right
+
+            gameStatus = BattleshipUserActivity.getGameStatus();
+            if (gameStatus == "placingDestroyerFinish"){
+                //length 2
+                UserArray.set(posit+1, "o");
+            }
+            else if ((gameStatus == "placingSubmarineFinish")||(gameStatus == "placingCruiserFinish")){
+                //length 3
+                UserArray.set(posit+1, "o");
+                UserArray.set(posit+2, "o");
+            }
+            else if (gameStatus == "placingBattleshipFinish"){
+                //length 4
+                UserArray.set(posit+1, "o");
+                UserArray.set(posit+2, "o");
+                UserArray.set(posit+3, "o");
+            }
+        }
+        if((posit - BattleshipUserActivity.getPosition()) > 1){
+            //the ship is going up
+
+            gameStatus = BattleshipUserActivity.getGameStatus();
+            if (gameStatus == "placingDestroyerFinish"){
+                //length 2
+                UserArray.set(posit-10, "o");
+            }
+            else if ((gameStatus == "placingSubmarineFinish")||(gameStatus == "placingCruiserFinish")){
+                //length 3
+                UserArray.set(posit-10, "o");
+                UserArray.set(posit-20, "o");
+            }
+            else if (gameStatus == "placingBattleshipFinish"){
+                //length 4
+                UserArray.set(posit-10, "o");
+                UserArray.set(posit-20, "o");
+                UserArray.set(posit-30, "o");
+            }
+        }
+        if((posit - BattleshipUserActivity.getPosition()) < -1){
+            //the ship is going down
+
+            gameStatus = BattleshipUserActivity.getGameStatus();
+            if (gameStatus == "placingDestroyerFinish"){
+                //length 2
+                UserArray.set(posit+10, "o");
+            }
+            else if ((gameStatus == "placingSubmarineFinish")||(gameStatus == "placingCruiserFinish")){
+                //length 3
+                UserArray.set(posit+10, "o");
+                UserArray.set(posit+20, "o");
+            }
+            else if (gameStatus == "placingBattleshipFinish"){
+                //length 4
+                UserArray.set(posit+10, "o");
+                UserArray.set(posit+20, "o");
+                UserArray.set(posit+30, "o");
+            }
+        }
+
+
+
+
+
 
     }
+    public static int getDirection(int initpos){
+        int dir;
+        if (initpos==0){if(Math.random()>=0.5){dir=4;}else{dir=2;}}
+/*3,1*/ else if ((initpos==97)||(initpos==98)||(initpos==99)||(initpos==87)||(initpos==88)||(initpos==89)||(initpos==77)||(initpos==78)||(initpos==79)){if(Math.random()>=0.5){dir=3;}else{dir=1;}}
+/*4,1*/ else if ((initpos==8)||(initpos==7)||(initpos==9)||(initpos==17)||(initpos==18)||(initpos==19)||(initpos==27)||(initpos==28)||(initpos==29)){if(Math.random()>=0.5){dir=4;}else{dir=1;}}
+/*3,2*/ else if ((initpos==91)||(initpos==92)||(initpos==90)||(initpos==80)||(initpos==70)||(initpos==81)||(initpos==82)||(initpos==71)||(initpos==72)){if(Math.random()>=0.5){dir=3;}else{dir=2;}}
+/*2,4*/ else if ((initpos==1)||(initpos==2)||(initpos==10)||(initpos==20)||(initpos==11)||(initpos==12)||(initpos==21)||(initpos==22)){if(Math.random()>=0.5){dir=4;}else{dir = 2;}}
 
-    private static void placeAIShip(List board, int direction, int x, int y,  int size){
-        if(direction==3){
-            for(int i=0; i<size; i++){
-                if(y-i>=0){
-                    board[x][y-i] = "o";
-                }
-            }
+/*1,2,3*/ else if ((initpos==73)||(initpos==74)||(initpos==75)||(initpos==76)||(initpos==83)||(initpos==84)||(initpos==85)||(initpos==86)||(initpos==93)||(initpos==94)||(initpos==95)||(initpos==96)){if (Math.random() >= 0.6) {
+                dir = 3;} else if ((Math.random() >= 0.3)&&(Math.random() < 0.6)){dir = 2;} else { dir = 1;}}
+/*4,2,3*/ else if ((initpos==60)||(initpos==50)||(initpos==40)||(initpos==30)||(initpos==31)||(initpos==32)||(initpos==41)||(initpos==42)||(initpos==51)||(initpos==52)||(initpos==61)||(initpos==62)){
+            if (Math.random() >= 0.6) {dir = 2;} else if ((Math.random() >= 0.3)&&(Math.random() < 0.6)){dir = 3;} else { dir = 4;}}
+/*1,4,3*/ else if ((initpos==37)||(initpos==38)||(initpos==39)||(initpos==47)||(initpos==48)||(initpos==49)||(initpos==57)||(initpos==58)||(initpos==59)||(initpos==67)||(initpos==68)||(initpos==69)){
+            if (Math.random() >= 0.6) {dir = 1;} else if ((Math.random() >= 0.3)&&(Math.random() < 0.6)){dir = 3;} else { dir = 4;}}
+/*1,2,4*/ else if ((initpos==3)||(initpos==4)||(initpos==5)||(initpos==6)||(initpos==13)||(initpos==14)||(initpos==15)||(initpos==16)||(initpos==23)||(initpos==24)||(initpos==25)||(initpos==26)){
+            if (Math.random() >= 0.6) {dir = 1;} else if ((Math.random() >= 0.3)&&(Math.random() < 0.6)){dir = 2;} else { dir = 4;}}
+
+        else {dir = getNum(1,4);}
+
+
+        return dir;
+    }
+    public static void placeAIShips(List<String> AIArrayCopy){
+
+        //destroyer
+        int initpos = getNum(0, 99);
+        int dir = getDirection(initpos);
+
+        AIArrayCopy.set(initpos, "o");
+        if(dir == 1){
+            //boat is going left
+            AIArrayCopy.set(initpos -1, "o");
         }
-        if(direction==4){
-            for(int i=0; i<size; i++){
-                if(y+i<=9){
-                    board[x][y+i] = "o";
-                }
-            }
+        else if(dir == 2){
+            //boat is going right
+            AIArrayCopy.set(initpos +1, "o");
         }
-        if(direction==1){
-            for(int i=0; i<size; i++){
-                if(x-i>=0){
-                    board[x-i][y] = "o";
-                }
-            }
+        else if(dir == 3){
+            //boat is going up
+            AIArrayCopy.set(initpos -10, "o");
         }
-        if(direction==2){
-            for(int i=0; i<size; i++){
-                if(x+i<=9){
-                    board[x+i][y] = "o";
-                }
+        else if(dir == 4){
+            //boat is going down
+            AIArrayCopy.set(initpos +10, "o");
+        }
+
+        //submarine & cruiser
+        for (int i =0;i<2;i++) {
+            initpos = getNum(0, 99);
+            dir = getDirection(initpos);
+
+            AIArrayCopy.set(initpos, "o");
+            if (dir == 1) {
+                //boat is going left
+                AIArrayCopy.set(initpos - 1, "o");
+                AIArrayCopy.set(initpos - 2, "o");
+            } else if (dir == 2) {
+                //boat is going right
+                AIArrayCopy.set(initpos + 1, "o");
+                AIArrayCopy.set(initpos +2, "o");
+            } else if (dir == 3) {
+                //boat is going up
+                AIArrayCopy.set(initpos - 10, "o");
+                AIArrayCopy.set(initpos -20, "o");
+            } else if (dir == 4) {
+                //boat is going down
+                AIArrayCopy.set(initpos + 10, "o");
+                AIArrayCopy.set(initpos + 20, "o");
             }
+
+        }
+
+        //battleship
+        initpos = getNum(0, 99);
+        dir = getDirection(initpos);
+
+        AIArrayCopy.set(initpos, "o");
+        if(dir == 1){
+            //boat is going left
+            AIArrayCopy.set(initpos -1, "o");
+            AIArrayCopy.set(initpos -2, "o");
+            AIArrayCopy.set(initpos -3, "o");
+        }
+        else if(dir == 2){
+            //boat is going right
+            AIArrayCopy.set(initpos +1, "o");
+            AIArrayCopy.set(initpos +2, "o");
+            AIArrayCopy.set(initpos +3, "o");
+        }
+        else if(dir == 3){
+            //boat is going up
+            AIArrayCopy.set(initpos -10, "o");
+            AIArrayCopy.set(initpos -20, "o");
+            AIArrayCopy.set(initpos -30, "o");
+        }
+        else if(dir == 4){
+            //boat is going down
+            AIArrayCopy.set(initpos +10, "o");
+            AIArrayCopy.set(initpos +20, "o");
+            AIArrayCopy.set(initpos +30, "o");
         }
     }
 
-    private static void placeShip(List board, int direction, int x, int y,  int size){
-        if(direction==1){
-            for(int i=0; i<size; i++){
-                if(x>0&&x<10&&y-i>0&&y-i<10){
-                    board[x][y-i] = "o";
-                }}
-        }
-        if(direction==2){
-            for(int i=0; i<size; i++){
-                if(x>0&&x<10&&y+i>0&&y+i<10){
-                    board[x][y+i] = "o";
-                }}
-        }
-        if(direction==3){
-            for(int i=0; i<size; i++){
-                if(x-i>0&&x-i<10&&y>0&&y<10){
-                    board[x-i][y] = "o";
-                }}
-        }
-        if(direction==4){
-            for(int i=0; i<size; i++){
-                if(x+i>0&&x+i<10&&y>0&&y<10){
-                    board[x+i][y] = "o";
-                }}
-        }
-    }
-
-    /**public static boolean placementCheck(int[][] board, int direction, int x, int y, int size){
-     if(overlapCheck(x, y, board)==true){
-     return false;
-     }
-     for(int i=0; i<size; i++){
-     if(direction==1){
-     if(overlapCheck(x, y, board)==false){
-     y = y - 1;
-     } else { return false; }
-     }
-     if(direction==2){
-     if(overlapCheck(x, y, board)==false){
-     y = y + 1;
-     } else { return false; }
-     }
-     if(direction==3){
-     if(overlapCheck(x, y, board)==false){
-     x = x - 1;
-     } else { return false; }
-     }
-     if(direction==4){
-     if(overlapCheck(x, y, board)==false){
-     x = x + 1;
-     } else { return false; }
-     }
-     }
-     return true;
-     }**/
-
+    /*
     private static void runGame(List board, int[][] AIboard) {
         AIturn(board);
         turn(AIboard);
@@ -294,15 +380,12 @@ public class Board {
                     System.out.print(" ");
                 }
                 if (board[i][j] == 1 /** && AI==false **/
-                        ) {
-                    System.out.print("o");
-                    System.out.print(" ");
-                }
+
                 /**
                  * if(board[i][j] == 1 && AI==true){ System.out.print("o");
                  * System.out.print(" "); }
                  **/
-                if (board[i][j] == 0) {
+          /*      if (board[i][j] == 0) {
                     System.out.print("'");
                     System.out.print(" ");
                 }
@@ -319,6 +402,6 @@ public class Board {
             return true;
         }
         return false;
-    }
+    }*/
 }
 
