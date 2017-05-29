@@ -248,20 +248,16 @@ public class Board {
         }
         //runGame(board, AIboard);
     }
-
-    private static boolean scan(List board) {
-        int x = 0;
-        if(int i=0; i<100; i++){
-            if(board.get(i)=="-1"){
-                x == -1;
+**/
+    public static boolean scan(List<String> board) {
+        for(int i=0; i<99; i++){
+            if(board.get(i)=="o"){
+                return true;
             }
         }
-        if (x == 1) {
-            return true;
-        }
-        return false;
+       return false; //game end
     }
-
+/*
     public static void AIturn(List board) {
         // boolean path = false;
         // int xprev = 0;
@@ -299,40 +295,28 @@ public class Board {
 
         // }
     }
-
-    private static void turn(List AIboard) {
-        System.out.println("");
-        System.out.println("**********************************");
-        System.out.println("YOUR TURN.");
-        System.out.println("Enter the x coordinate:");
-        int x = sc.nextInt();
-        while (x < 0 || x > 10) {
-            System.out.println("Please enter a valid x coordinate between 0 and 10.");
-            x = sc.nextInt();
+*/
+    public static void turn(List<String> AI, List<String> AICopy) { //USER TURN, takes AIArray copy
+        int pos = BattleshipUserActivity.getPosition();
+        if(AICopy.get(pos)=="o"){
+            AI.set(pos, "x");
+            Toast.makeText(context, "SUCCESS", Toast.LENGTH_SHORT).show();
+        }else {
+            AI.set(pos, "'");
+            Toast.makeText(context, "FAILURE", Toast.LENGTH_SHORT).show();
         }
-        System.out.println("Enter the y coordinate:");
-        int y = sc.nextInt();
-        while (y < 0 || y > 10) {
-            System.out.println("Please enter a valid y coordinate between 0 and 10.");
-            y = sc.nextInt();
-        }
-
-        System.out.println("Targetting: " + x + " " + y);
-        if (hitCheck(AIboard, x, y) == false) {
-            if(AIboard[x][y] == 0){
-                System.out.println("You already struck there, silly!");
-            }
-            else{
-                AIboard[x][y] = 2;
-                System.out.println("Your attack was ineffective!");
-            }
-        } else {
-            System.out.println("You hit the enemy ship!");
-            AIboard[x][y] = 0;
-        }
-        System.out.println("**********************************");
-        displayBoard(AIboard, true);
     }
+
+    public static void AIturn(List<String> Board){
+        int pos = getNum(0, 99);
+        if(Board.get(pos)=="o"){
+            Board.set(pos, "x");
+            Toast.makeText(context, "YOU WERE HIT", Toast.LENGTH_SHORT).show();
+        }else{
+            Board.set(pos, "`");
+            Toast.makeText(context, "MISS", Toast.LENGTH_SHORT).show();
+        }
+    }/*
 
     public static boolean hitCheck(List board, int x, int y) {
         if (board[x][y] == -1) {

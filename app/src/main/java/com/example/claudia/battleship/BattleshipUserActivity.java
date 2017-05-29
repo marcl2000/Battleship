@@ -64,7 +64,7 @@ public class BattleshipUserActivity extends AppCompatActivity {
         }
 
         final List<String> UserArray = new ArrayList<String>(Arrays.asList(tempUserArray));
-        ArrayList<String> AIArrayCopy = new ArrayList<>(); //for invisible placing of ships
+        final List<String> AIArrayCopy = AIArray; //for invisible placing of ships
 
         final ArrayAdapter<String> AIAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, AIArray);
         aiGridView.setAdapter(AIAdapter);
@@ -74,19 +74,39 @@ public class BattleshipUserActivity extends AppCompatActivity {
 
 
 
-        Board.placeAIShips(AIArrayCopy);
+        //Board.placeAIShips(AIArrayCopy);
 
         //to test
-        //Board.placeAIShips(AIArray);
-        //((ArrayAdapter<String>)aiGridView.getAdapter()).notifyDataSetChanged();
+        Board.placeAIShips(AIArray);
+        ((ArrayAdapter<String>)aiGridView.getAdapter()).notifyDataSetChanged();
 
         Toast.makeText(getApplication().getBaseContext(), "Welcome to Battleship!", Toast.LENGTH_SHORT).show();
         Toast.makeText(getApplication().getBaseContext(), "You will now choose your ships", Toast.LENGTH_LONG).show();
         Toast.makeText(getApplication().getBaseContext(), "Choose the initial position of your Destroyer (size 2)", Toast.LENGTH_LONG).show();
 
-
-
         aiGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = parent.getItemAtPosition(position).toString();
+                pos = position;
+                Board.turn(AIArray, AIArrayCopy);
+                ((ArrayAdapter<String>)aiGridView.getAdapter()).notifyDataSetChanged();
+                Board.AIturn(UserArray);
+                ((ArrayAdapter<String>)userGridView.getAdapter()).notifyDataSetChanged();
+
+                if(Board.scan(UserArray)==false){
+                    //nEW SCREEN!!
+                }
+                else if(Board.scan(AIArray)==false){
+                    //NEW SCREEN1!!1!
+                }else{
+                    Toast.makeText(getApplication().getBaseContext(), "Choose your next point of attack.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+        userGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
@@ -152,7 +172,7 @@ public class BattleshipUserActivity extends AppCompatActivity {
 
 
                 else{
-                    //PLAY THE GAMEEE1!!!
+                    Toast.makeText(getApplication().getBaseContext(), "Choose your point of attack.", Toast.LENGTH_LONG).show();
                 }
             }
         });
