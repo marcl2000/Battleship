@@ -9,30 +9,27 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-public class InstructionActivity extends AppCompatActivity {
+public class FinalScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instruction);
+        setContentView(R.layout.activity_final_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
-        Button mBackButton = (Button) findViewById(R.id.btnBack);
-
-
-        mBackButton.setOnClickListener(new View.OnClickListener() {
+        Button mMenuButton = (Button) findViewById(R.id.startAgain);
+        mMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //mStartButton.setText("Clicked");
-                Intent i = new Intent(InstructionActivity.this, BoardActivity.class);
+                Intent i = new Intent(FinalScreenActivity.this, BoardActivity.class);
                 startActivity(i);
                 ////CODE FOR SWTITCHING TO ANOTHER CLASS/SCREEN
             }
         });
-    }
-    }
 
 
+    }
+
+}

@@ -1,6 +1,8 @@
 package com.example.claudia.battleship;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -62,9 +64,13 @@ public class BattleshipUserActivity extends AppCompatActivity {
         for (int i = 0; i < 100; i++) {
             tempUserArray[i] = "~";
         }
+        String[] tempAIArrayCopy = new String[100];
+        for (int i = 0; i < 100; i++) {
+            tempUserArray[i] = "~";
+        }
 
         final List<String> UserArray = new ArrayList<String>(Arrays.asList(tempUserArray));
-        final List<String> AIArrayCopy = AIArray; //for invisible placing of ships
+        final List<String> AIArrayCopy = new ArrayList<String>(Arrays.asList(tempAIArrayCopy)); //for invisible placing of ships
 
         final ArrayAdapter<String> AIAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, AIArray);
         aiGridView.setAdapter(AIAdapter);
@@ -73,12 +79,12 @@ public class BattleshipUserActivity extends AppCompatActivity {
 
 
 
-
-        //Board.placeAIShips(AIArrayCopy);
+        ((ArrayAdapter<String>)aiGridView.getAdapter()).notifyDataSetChanged();
+        Board.placeAIShips(AIArrayCopy);
 
         //to test
-        Board.placeAIShips(AIArray);
-        ((ArrayAdapter<String>)aiGridView.getAdapter()).notifyDataSetChanged();
+        //Board.placeAIShips(AIArray);
+        //
 
         Toast.makeText(getApplication().getBaseContext(), "Welcome to Battleship!", Toast.LENGTH_SHORT).show();
         Toast.makeText(getApplication().getBaseContext(), "You will now choose your ships", Toast.LENGTH_LONG).show();
@@ -90,20 +96,30 @@ public class BattleshipUserActivity extends AppCompatActivity {
                 String selectedItem = parent.getItemAtPosition(position).toString();
                 pos = position;
                 Board.turn(AIArray, AIArrayCopy);
-                ((ArrayAdapter<String>)aiGridView.getAdapter()).notifyDataSetChanged();
+                ((ArrayAdapter<String>) aiGridView.getAdapter()).notifyDataSetChanged();
                 Board.AIturn(UserArray);
-                ((ArrayAdapter<String>)userGridView.getAdapter()).notifyDataSetChanged();
+                ((ArrayAdapter<String>) userGridView.getAdapter()).notifyDataSetChanged();
 
-                if(Board.scan(UserArray)==false){
-                    //nEW SCREEN!!
-                }
-                else if(Board.scan(AIArray)==false){
-                    //NEW SCREEN1!!1!
-                }else{
+                if (Board.scan(UserArray) == false) {
+                    TextView txtView = (TextView) ((Activity) getApplication().getBaseContext()).findViewById(R.id.winlose);
+                    txtView.setText("YOU LOST! TRY AGAIN");
+
+                    Intent i = new Intent(BattleshipUserActivity.this, FinalScreenActivity.class);
+                    startActivity(i);
+
+                } else if (Board.scan(AIArray) == false) {
+                    TextView txtView = (TextView) ((Activity) getApplication().getBaseContext()).findViewById(R.id.winlose);
+                    txtView.setText("YOU WON! CONGRATULATIONS");
+
+                    Intent i = new Intent(BattleshipUserActivity.this, FinalScreenActivity.class);
+                    startActivity(i);
+
+                } else {
                     Toast.makeText(getApplication().getBaseContext(), "Choose your next point of attack.", Toast.LENGTH_LONG).show();
                 }
             }
         });
+
 
 
         userGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -132,7 +148,7 @@ public class BattleshipUserActivity extends AppCompatActivity {
                     Board.placeStart(UserArray);
                     ((ArrayAdapter<String>) userGridView.getAdapter()).notifyDataSetChanged();
                     gameStatus = "placingSubmarineFinish";
-                    Toast.makeText(getApplication().getBaseContext(), "Tap the coordinate next to the initial in the direction of your ship", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplication().getBaseContext(), "Tap the coordinate next to the initial in the direction of your ship", Toast.LENGTH_LONG).show();
                 }
                 else if(gameStatus=="placingSubmarineFinish"){
 
@@ -146,7 +162,7 @@ public class BattleshipUserActivity extends AppCompatActivity {
                     Board.placeStart(UserArray);
                     ((ArrayAdapter<String>) userGridView.getAdapter()).notifyDataSetChanged();
                     gameStatus = "placingCruiserFinish";
-                    Toast.makeText(getApplication().getBaseContext(), "Tap the coordinate next to the initial in the direction of your ship", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplication().getBaseContext(), "Tap the coordinate next to the initial in the direction of your ship", Toast.LENGTH_LONG).show();
                 }
                 else if(gameStatus=="placingCruiserFinish"){
 
@@ -160,19 +176,14 @@ public class BattleshipUserActivity extends AppCompatActivity {
                     Board.placeStart(UserArray);
                     ((ArrayAdapter<String>) userGridView.getAdapter()).notifyDataSetChanged();
                     gameStatus = "placingBattleshipFinish";
-                    Toast.makeText(getApplication().getBaseContext(), "Tap the coordinate next to the initial in the direction of your ship", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplication().getBaseContext(), "Tap the coordinate next to the initial in the direction of your ship", Toast.LENGTH_LONG).show();
                 }
                 else if(gameStatus=="placingBattleshipFinish"){
 
                     Board.placeFinish(UserArray);
                     ((ArrayAdapter<String>) userGridView.getAdapter()).notifyDataSetChanged();
                     gameStatus = "Ready";
-                    Toast.makeText(getApplication().getBaseContext(), "You are ready to play!", Toast.LENGTH_LONG).show();
-                }
-
-
-                else{
-                    Toast.makeText(getApplication().getBaseContext(), "Choose your point of attack.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication().getBaseContext(), "You are ready to play! Choose your point of attack.", Toast.LENGTH_LONG).show();
                 }
             }
         });

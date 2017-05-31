@@ -11,8 +11,8 @@
     <string name="instruction_body1">Welcome to Battleship! Press the Start Game button on the menu page to begin a game.</string>
     <string name="instruction_body2">Follow the prompts to place your ship and attack the opponent.
          There is a two length Destroyer, a three length Submarine, a three length Cruiser, and a four length Battleship. Make
-         sure not to overlap your ships!</string>
-    <string name="instruction_body3">Upon attack, the square chosen will turn black if the attack was unsuccessful, and red if
+         sure not to overlap your ships!If they fall off the board, they will wrap around.</string>
+    <string name="instruction_body3">Upon attack, the square chosen will turn to a \' if the attack was unsuccessful, and a x if
          an enemy ship has been hit. Sink all the enemy ships before they sink yours to win! </string>
     <string name="instruction_body4">Press the back button to go back to the menu and start a game.</string>
     <string name="btnBack">Back to Menu</string>
@@ -24,4 +24,12 @@
     <string name="title_activity_user_screen">UserScreenActivity</string>
     <string name="title_activity_battleship_player">BattleshipPlayerActivity</string>
     <string name="title_activity_battleship_user">BattleshipUserActivity</string>
+
+    //End page//
+    <string name="title_activity_final_screen">FinalScreenActivity</string>
+    <string name="back_to_menu">Back to Menu</string>
+
+
 </resources>
+
+

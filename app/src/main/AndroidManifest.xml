@@ -26,6 +26,10 @@
         <activity
             android:name=".BattleshipUserActivity"
             android:label="@string/title_activity_battleship_user"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FinalScreenActivity"
+            android:label="@string/title_activity_final_screen"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
