@@ -300,10 +300,11 @@ public class Board {
         int pos = BattleshipUserActivity.getPosition();
         if(AICopy.get(pos)=="o"){
             AI.set(pos, "x");
-            Toast.makeText(context, "SUCCESS", Toast.LENGTH_SHORT).show();
+            AICopy.set(pos, "x");
+            //Toast.makeText(context, "SUCCESS", Toast.LENGTH_SHORT).show();
         }else {
             AI.set(pos, "'");
-            Toast.makeText(context, "FAILURE", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "FAILURE", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -311,10 +312,10 @@ public class Board {
         int pos = getNum(0, 99);
         if(Board.get(pos)=="o"){
             Board.set(pos, "x");
-            Toast.makeText(context, "YOU WERE HIT", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "YOU WERE HIT", Toast.LENGTH_SHORT).show();
         }else{
             Board.set(pos, "`");
-            Toast.makeText(context, "MISS", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "MISS", Toast.LENGTH_SHORT).show();
         }
     }/*
 
