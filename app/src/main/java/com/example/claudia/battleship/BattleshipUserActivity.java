@@ -26,13 +26,6 @@ import java.util.List;
 import static com.example.claudia.battleship.R.id.aiBoard;
 import static com.example.claudia.battleship.R.id.userBoard;
 
-/*REASON WHY: why the text was clicked
-         1: Placing a ship
-         2: Attacking a ship
-*/
-
-
-
 public class BattleshipUserActivity extends AppCompatActivity {
     static int pos;
     static String gameStatus = "placingDestroyer";
@@ -45,7 +38,10 @@ public class BattleshipUserActivity extends AppCompatActivity {
         return gameStatus;
     }
 
-
+    /**
+     * onCreate
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

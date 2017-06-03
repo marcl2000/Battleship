@@ -16,6 +16,11 @@ public class BoardActivity extends AppCompatActivity {
 //title page
     private Button mStartButton;
     private Button mInfoButton;
+
+    /**
+     * onCreate
+     * @param savedInstanceState
+     */
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +53,11 @@ public class BoardActivity extends AppCompatActivity {
     }
 
 
-
-
-
+    /**
+     * method
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -58,6 +65,11 @@ public class BoardActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * method
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

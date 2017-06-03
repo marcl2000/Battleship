@@ -10,7 +10,10 @@ import android.view.View;
 import android.widget.Button;
 
 public class InstructionActivity extends AppCompatActivity {
-
+    /**
+     * onCreate
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
